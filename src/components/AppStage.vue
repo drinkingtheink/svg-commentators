@@ -2,15 +2,15 @@
   <main>
     <h1>SVG Commentators</h1>
     <section class="commentators-stage">
-      <Bob />
-      <Harry />
+      <BobStage />
+      <HarryStage />
     </section>
   </main>
 </template>
 
 <script>
-import Bob from './Bob.vue'
-import Harry from './Harry.vue'
+import BobStage from './BobStage.vue'
+import HarryStage from './HarryStage.vue'
 
 export default {
   name: 'AppStage',
@@ -18,8 +18,8 @@ export default {
     msg: String
   },
   components: {
-    Bob,
-    Harry
+    BobStage,
+    HarryStage
   }
 };
 </script>

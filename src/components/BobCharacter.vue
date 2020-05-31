@@ -149,7 +149,6 @@ export default {
     },
     animating: function() {
       if(!this.animating && this.openMouthIsActive) {
-        alert(`FACE ENDED WITH MOUTH OPEN!!!!!`);
         this.activeMouth === 'mouth-closed'
       }
     }

@@ -1,6 +1,5 @@
 <template>
   <section class="bob">
-    <h2>Bob Uecker</h2>
     <BobCharacter />
   </section>
 </template>
@@ -9,7 +8,7 @@
   import BobCharacter from './BobCharacter.vue'
 
   export default {
-    name: 'Bob',
+    name: 'BobStage',
     components: {
       BobCharacter
     }
