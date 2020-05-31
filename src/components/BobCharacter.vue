@@ -124,80 +124,80 @@
 </template>
 
 <script>
-import { TimelineLite } from 'gsap'
+  import { TimelineLite } from 'gsap'
 
-export default {
-  name: 'BobCharacter',
-  data () {
-    return {
-      mouthInterval: null,
-      activeMouth: null,
-      talkTimer: null,
-      animating: false,
-      mouthIds: [
-        'mouth-1',
-        'mouth-2',
-        'mouth-closed'
-      ]
-    }
-  },
-  watch: {
-    mouthInterval: function() {
-      if(this.mouthInterval > 0) {
-        this.talk();
+  export default {
+    name: 'BobCharacter',
+    data () {
+      return {
+        mouthInterval: null,
+        activeMouth: null,
+        talkTimer: null,
+        animating: false,
+        mouthIds: [
+          'mouth-1',
+          'mouth-2',
+          'mouth-closed'
+        ]
       }
     },
-    animating: function() {
-      if(!this.animating && this.openMouthIsActive) {
-        this.activeMouth === 'mouth-closed'
+    watch: {
+      mouthInterval: function() {
+        if(this.mouthInterval > 0) {
+          this.talk();
+        }
+      },
+      animating: function() {
+        if(!this.animating && this.openMouthIsActive) {
+          this.activeMouth === 'mouth-closed'
+        }
+      }
+    },
+    computed: {
+      openMouthIsActive() {
+        return this.activeMouth === 'mouth-closed'
+      }
+    },
+    mounted() { 
+      const { bobhead } = this.$refs
+      const timeline = new TimelineLite() 
+
+      // timeline.to(bobhead, 1, { x: 200, rotation: 90 })
+      this.setMouthInterval();
+    },
+    methods: {
+      setMouthInterval() {
+        this.mouthInterval = this.getRandomInt(5000, 10000);
+      },
+      getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
+      idMatchesActiveMouth(idString) {
+        return this.activeMouth === idString;
+      },
+      talk() {
+        if(!this.animating) {
+          this.animating = true;  
+          var timeleft = this.getRandomInt(10, 100);
+          this.talkTimer = setInterval(() => {
+            if(timeleft <= 0){
+              clearInterval(this.talkTimer);
+              this.animating = false;
+            } else {
+              this.selectRandomMouth();
+            }
+            timeleft -= 1;
+          }, 100); 
+        }     
+      },
+      selectRandomMouth() {
+        let randomMouth = this.mouthIds[Math.floor(Math.random()*this.mouthIds.length)];
+        this.activeMouth = randomMouth;
       }
     }
-  },
-  computed: {
-    openMouthIsActive() {
-      return this.activeMouth === 'mouth-closed'
-    }
-  },
-  mounted() { 
-    const { bobhead } = this.$refs
-    const timeline = new TimelineLite() 
-
-    // timeline.to(bobhead, 1, { x: 200, rotation: 90 })
-    this.setMouthInterval();
-  },
-  methods: {
-    setMouthInterval() {
-      this.mouthInterval = this.getRandomInt(5000, 10000);
-    },
-    getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
-    idMatchesActiveMouth(idString) {
-      return this.activeMouth === idString;
-    },
-    talk() {
-      if(!this.animating) {
-        this.animating = true;  
-        var timeleft = this.getRandomInt(10, 100);
-        this.talkTimer = setInterval(() => {
-          if(timeleft <= 0){
-            clearInterval(this.talkTimer);
-            this.animating = false;
-          } else {
-            this.selectRandomMouth();
-          }
-          timeleft -= 1;
-        }, 100); 
-      }     
-    },
-    selectRandomMouth() {
-      let randomMouth = this.mouthIds[Math.floor(Math.random()*this.mouthIds.length)];
-      this.activeMouth = randomMouth;
-    }
-  }
-};
+  };
 </script>
 
 <style scoped>
