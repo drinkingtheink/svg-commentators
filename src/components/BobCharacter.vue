@@ -133,7 +133,7 @@
         mouthInterval: null,
         activeMouth: null,
         talkTimer: null,
-        animating: false,
+        talking: false,
         mouthIds: [
           'mouth-1',
           'mouth-2',
@@ -147,7 +147,7 @@
           this.talk();
         }
       },
-      animating: function() {
+      talking: function() {
         if(!this.animating && this.openMouthIsActive) {
           this.activeMouth === 'mouth-closed'
         }
@@ -178,13 +178,13 @@
         return this.activeMouth === idString;
       },
       talk() {
-        if(!this.animating) {
-          this.animating = true;  
+        if(!this.talking) {
+          this.talking = true;  
           var timeleft = this.getRandomInt(10, 100);
           this.talkTimer = setInterval(() => {
             if(timeleft <= 0){
               clearInterval(this.talkTimer);
-              this.animating = false;
+              this.talking = false;
             } else {
               this.selectRandomMouth();
             }
@@ -203,6 +203,7 @@
 <style scoped>
   #bob-character {
     width: 120%;
+    margin-top: 3em;
   }
 
   .cls-1{fill:#7c675b;}

@@ -1,6 +1,5 @@
 <template>
   <main>
-    <h1>SVG Commentators</h1>
     <section class="commentators-stage">
       <BobStage />
       <HarryStage />
@@ -24,7 +23,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .commentators-stage {
   display: flex;
   justify-content: space-around;
