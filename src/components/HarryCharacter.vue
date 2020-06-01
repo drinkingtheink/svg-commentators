@@ -139,7 +139,7 @@
         }
       },
       talking: function() {
-        if(!this.animating) {
+        if(!this.talking) {
           this.activeMouth === 'mouth-1'
         } 
       },
@@ -194,7 +194,7 @@
 
   @keyframes headBob {
     100% {
-      transform: scale(0.99);
+      transform: scale(0.999);
     }
 
     to {

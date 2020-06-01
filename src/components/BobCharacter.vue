@@ -160,7 +160,7 @@
         }
       },
       talking: function() {
-        if(!this.animating && this.closedMouthIsActive) {
+        if(!this.talking && this.closedMouthIsActive) {
           this.activeMouth === 'mouth-closed'
         }
       }
@@ -210,16 +210,12 @@
   }
 
   @keyframes headBob {
-    100% {
-      transform: scale(1.008);
+    80% {
+      transform: translateY(2px) translateX(-3px);
     }
 
-    20% {
-      transform: scale(0.988);
-    }
-
-    to {
-      transform: scale(1);
+    25% {
+      transform: translateY(-3px);
     }
   }
 
