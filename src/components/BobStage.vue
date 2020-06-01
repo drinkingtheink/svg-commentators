@@ -22,6 +22,7 @@
 
 <style scoped>
   .bob {
-
+    position: static;
+    z-index: 1;
   }
 </style>

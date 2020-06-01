@@ -23,5 +23,7 @@
 <style scoped>
   .harry {
     margin-left: -18em;
+    position: static;
+    z-index: 1;
   }
 </style>
