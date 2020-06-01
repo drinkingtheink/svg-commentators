@@ -1,6 +1,6 @@
 <template>
   <section class="bob">
-    <BobCharacter />
+    <BobCharacter :getRandomInt="getRandomInt" :makeTalk="makeTalk" />
   </section>
 </template>
 
@@ -9,6 +9,10 @@
 
   export default {
     name: 'BobStage',
+    props: {
+      getRandomInt: Function,
+      makeTalk: Boolean
+    },
     components: {
       BobCharacter
     }
@@ -18,6 +22,6 @@
 
 <style scoped>
   .bob {
-    
+
   }
 </style>

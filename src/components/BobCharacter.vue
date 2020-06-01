@@ -1,6 +1,11 @@
 <template>
   <div>
-    <button v-on:click="setMouthInterval">Restart talk</button>
+    <button 
+      v-on:click="setMouthInterval"
+      :disabled="talking"
+      >
+      Make Talk
+    </button>
     <svg id="bob-character" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1727.65 1937.62">
        
        <g id="jacket-bg-shadow">
@@ -124,10 +129,12 @@
 </template>
 
 <script>
-  import { TimelineLite } from 'gsap'
-
   export default {
     name: 'BobCharacter',
+    props: {
+      getRandomInt: Function,
+      makeTalk: Boolean
+    },
     data () {
       return {
         mouthInterval: null,
@@ -147,32 +154,28 @@
           this.talk();
         }
       },
+      makeTalk: function() {
+        if(this.makeTalk) {
+          this.setMouthInterval();
+        }
+      },
       talking: function() {
-        if(!this.animating && this.openMouthIsActive) {
+        if(!this.animating && this.closedMouthIsActive) {
           this.activeMouth === 'mouth-closed'
         }
       }
     },
     computed: {
-      openMouthIsActive() {
+      closedMouthIsActive() {
         return this.activeMouth === 'mouth-closed'
       }
     },
     mounted() { 
-      const { bobhead } = this.$refs
-      const timeline = new TimelineLite() 
-
-      // timeline.to(bobhead, 1, { x: 200, rotation: 90 })
       this.setMouthInterval();
     },
     methods: {
       setMouthInterval() {
         this.mouthInterval = this.getRandomInt(5000, 10000);
-      },
-      getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
       },
       idMatchesActiveMouth(idString) {
         return this.activeMouth === idString;

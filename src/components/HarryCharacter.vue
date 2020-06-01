@@ -1,6 +1,11 @@
 <template>
   <div>
-    <button v-on:click="setMouthInterval">Restart talk</button>
+    <button 
+      v-on:click="setMouthInterval"
+      :disabled="talking"
+      >
+      Make Talk
+    </button>
     <svg id="harry-character" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1176 1340">
        <g id="jacket">
           <path id="jacket-bg" class="cls-1" d="M860.34,1152.73,870.4,687.61c-79.33-44.28-192.7-72-318.6-72-118.88,0-226.59,24.72-305,64.76l-10.06,472.37Z"/>
@@ -112,6 +117,10 @@
 
   export default {
     name: 'HarryCharacter',
+    props: {
+      getRandomInt: Function,
+      makeTalk: Boolean
+    },
     data() {
       return {
         mouthInterval: null,
@@ -135,7 +144,12 @@
         if(!this.animating) {
           this.activeMouth === 'mouth-1'
         }
-      }
+      },
+      makeTalk: function() {
+        if(this.makeTalk) {
+          this.setMouthInterval();
+        }
+      },
     },
     computed: {
       openMouthIsActive() {
@@ -152,11 +166,6 @@
     methods: {
       setMouthInterval() {
         this.mouthInterval = this.getRandomInt(5000, 10000);
-      },
-      getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
       },
       idMatchesActiveMouth(idString) {
         return this.activeMouth === idString;

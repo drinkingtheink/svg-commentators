@@ -1,6 +1,6 @@
 <template>
   <section class="harry">
-    <HarryCharacter />
+    <HarryCharacter :getRandomInt="getRandomInt" :makeTalk="makeTalk" />
   </section>
 </template>
 
@@ -9,6 +9,10 @@
 
   export default {
     name: 'HarryStage',
+    props: {
+      getRandomInt: Function,
+      makeTalk: Boolean
+    },
     components: {
       HarryCharacter
     }

@@ -50,6 +50,15 @@ export default {
     background-color: #273a82;
     border: 4px solid white;
     box-shadow: 10px 5px 38px black;
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  footer .emblem .emblem-inner {
+    font-size: 1800%;
+    display: inline-block;
+    text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
   }
 
   footer {
